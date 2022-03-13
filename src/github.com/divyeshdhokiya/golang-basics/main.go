@@ -3,48 +3,69 @@ package main
 import "fmt"
 
 func main() {
-	/* Arrays */
-	// 1. predefined size
-	students := [3]int{1, 2, 3}
-	fmt.Printf("%v\n", students) // OP: [1 2 3]
+	/* Slices */
+	students := []int{1, 2, 3}
+	fmt.Printf("%v\n", students)      // OP: [1 2 3]
+	fmt.Printf("%v\n", len(students)) // OP: 3
+	fmt.Printf("%v\n", cap(students)) // OP: 3
 
-	// 2. dynamic size
-	dStudents := [...]int{1, 2, 3, 4}
-	fmt.Printf("%v\n", dStudents) // OP: [1 2 3 4]
+	a := []int{11, 22, 33, 44, 55, 66, 77, 88}
+	b := a[:]
+	c := a[:3]
+	d := a[5:]
+	e := a[5:7]
+	fmt.Printf("%v\n", a) // OP: [11 22 33 44 55 66 77 88]
+	fmt.Printf("%v\n", b) // OP: [11 22 33 44 55 66 77 88]
+	fmt.Printf("%v\n", c) // OP: [11 22 33]
+	fmt.Printf("%v\n", d) // OP: [66 77 88]
+	fmt.Printf("%v\n", e) // OP: [66 77]
 
-	arr := []int{1, 2, 3, 4}
-	fmt.Printf("%v\n", arr) // OP: [1 2 3 4]
+	a[5] = 100            // Update original array hence effect to all other arrays
+	fmt.Printf("%v\n", a) // OP: [11 22 33 44 55 100 77 88]
+	fmt.Printf("%v\n", b) // OP: [11 22 33 44 55 100 77 88]
+	fmt.Printf("%v\n", c) // OP: [11 22 33]
+	fmt.Printf("%v\n", d) // OP: [100 77 88]
+	fmt.Printf("%v\n", e) // OP: [100 77]
 
-	var students1 [3]string
-	fmt.Printf("%v\n", students1) // OP: [ ]
-	students1[0] = "First"
-	students1[1] = "Second"
-	students1[2] = "Third"
-	fmt.Printf("%v\n", students1)      // OP: [First Second Third]
-	fmt.Printf("%v\n", len(students1)) // OP: 3
+	// Make function
+	aa := make([]int, 3, 100)
+	fmt.Printf("%v\n", aa)      // OP: [0 0 0]
+	fmt.Printf("%v\n", len(aa)) // OP: 3
+	fmt.Printf("%v\n", cap(aa)) // OP: 100
 
 	// ---
-	matrix := [3][3]int{{1, 2, 3}, {4, 5, 6}}
+	x := []int{}
+	fmt.Printf("%v\n", x)      // OP: []
+	fmt.Printf("%v\n", len(x)) // OP: 0
+	fmt.Printf("%v\n", cap(x)) // OP: 0
 
-	fmt.Printf("%v\n", matrix) // OP: [[1 2 3] [4 5 6] [0 0 0]]
+	x = append(x, 2)
+	fmt.Printf("%v\n", x)      // OP: [2]
+	fmt.Printf("%v\n", len(x)) // OP: 1
+	fmt.Printf("%v\n", cap(x)) // OP: 1
 
-	matrix[2] = [...]int{6, 7, 8}
-	fmt.Printf("%v\n", matrix) // OP: [[1 2 3] [4 5 6] [6 7 8]]
+	// x = append(x, 3, 4, 5, 6)
+	// fmt.Printf("%v\n", x)      // OP: [2 3 4 5 6]
+	// fmt.Printf("%v\n", len(x)) // OP: 5
+	// fmt.Printf("%v\n", cap(x)) // OP: 6
 
-	arr1 := [...]int{1, 2, 3}
+	x = append(x, []int{3, 4, 5, 6}...)
+	fmt.Printf("%v\n", x)      // OP: [2 3 4 5 6]
+	fmt.Printf("%v\n", len(x)) // OP: 5
+	fmt.Printf("%v\n", cap(x)) // OP: 6
 
-	// Copy array: value
-	arr2 := arr1
-	arr2[2] = 4
+	// Stack
+	w := []int{1, 2, 3, 4, 5, 6}
+	fmt.Printf("%v\n", w) // OP: [1 2 3 4 5 6]
+	// Shift: remove first element
+	y := w[1:]
+	fmt.Printf("%v\n", y) // OP: [2 3 4 5 6]
+	// Shift: remove last element
+	y2 := w[:len(w)-1]
+	fmt.Printf("%v\n", y2) // OP: [1 2 3 4 5]
+	// Shift: remove n element -> 3
+	y3 := append(w[:2], w[3:]...)
+	fmt.Printf("%v\n", y3) // OP: [1 2 4 5 6]
 
-	fmt.Printf("%v\n", arr1) // OP: [1 2 3]
-	fmt.Printf("%v\n", arr2) // OP: [1 2 4]
-
-	// Copy array: reference
-	arr3 := &arr1
-	arr3[1] = 9
-
-	fmt.Printf("%v\n", arr1) // OP: [1 9 3]
-	fmt.Printf("%v\n", arr3) // OP: &[1 9 3]
-
+	
 }

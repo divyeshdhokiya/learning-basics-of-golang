@@ -2,42 +2,59 @@ package main
 
 import "fmt"
 
+type Animal struct {
+	Name   string
+	Origin string
+}
+
+type Bird struct {
+	Animal
+	Speed  float32
+	CanFly bool
+}
+
+type Car struct {
+	Model string
+	Year  int
+	Color string
+	Parts []string
+}
+
 func main() {
-	/* Maps */
-	/* 1 */
-	statePopulations := map[string]int{
-		"a": 10,
-		"b": 10,
-		"c": 10,
-		"d": 10,
+	/* Struct */
+	aCar := Car{
+		Model: "Toyota",
+		Year:  2000,
+		Color: "White",
+		Parts: []string{
+			"Doors",
+			"Wheels",
+		},
 	}
-	fmt.Println(statePopulations) // OP: map[a:10 b:10 c:10 d:10]
 
-	/* 2 */
-	statePops := make(map[string]int)
-	statePops = map[string]int{
-		"a": 10,
-		"b": 10,
-		"c": 10,
-		"d": 10,
-	}
-	fmt.Println(statePops) // OP: map[a:10 b:10 c:10 d:10]
+	fmt.Println(aCar)
 
-	// Read one
-	fmt.Println(statePops["a"]) // OP: 10
+	// Fetch
+	fmt.Println(aCar.Model)    // OP: Toyota
+	fmt.Println(aCar.Parts)    // OP: [Doors Wheels]
+	fmt.Println(aCar.Parts[1]) // OP: Wheels
 
-	// Add new
-	statePops["e"] = 10
-	fmt.Println(statePops) // OP: map[a:10 b:10 c:10 d:10, e:10]
+	/* Anonymous struct */
+	aDr := struct{ name string }{name: "Dr X"}
+	fmt.Println(aDr) // OP: {Dr X}
+	bDr := aDr
+	bDr.name = "Dr Z"
+	fmt.Println(bDr) // OP: {Dr Z}
 
-	//Delete
-	delete(statePops, "e")
-	fmt.Println(statePops) // OP: map[a:10 b:10 c:10 d:10]
+	// Note: use & to manipulate main struct
 
-	fmt.Println(statePops["e"]) // OP: 0
+	/* Embedded */
+	b := Bird{}
+	b.Name = "Sparrow"
+	b.Origin = "IN"
+	b.CanFly = true
+	b.Speed = 10
 
-	// is exist
-	key, ok := statePops["e"]
-	fmt.Println(key, ok) // OP: 0, false
+	fmt.Println(b) // OP: {{Sparrow IN} 10 true}
 
 }

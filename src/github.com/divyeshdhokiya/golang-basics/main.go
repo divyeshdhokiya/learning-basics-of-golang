@@ -2,9 +2,16 @@ package main
 
 import "fmt"
 
-func main() {
-	/* Rune */
-	s := 'a'
-	fmt.Printf("%v,%T\n", s, s) // OP: 97, int32
+const b int16 = 90
 
+func main() {
+	/* Const */
+	const a int = 10
+	const aa = 11                // implicit conversion
+	fmt.Printf("%v, %T", a, a)   // 10, int
+	fmt.Printf("%v, %T", aa, aa) // 11, int
+
+	// shadow
+	const b int = 89
+	fmt.Printf("%v, %T", b, b) // 89, int
 }

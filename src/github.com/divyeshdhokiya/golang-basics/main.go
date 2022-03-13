@@ -2,16 +2,15 @@ package main
 
 import "fmt"
 
-const b int16 = 90
+const (
+	a = iota
+	b = iota
+	c = iota
+)
 
 func main() {
-	/* Const */
-	const a int = 10
-	const aa = 11                // implicit conversion
-	fmt.Printf("%v, %T", a, a)   // 10, int
-	fmt.Printf("%v, %T", aa, aa) // 11, int
-
-	// shadow
-	const b int = 89
-	fmt.Printf("%v, %T", b, b) // 89, int
+	/* Numerated const */
+	fmt.Println(a)
+	fmt.Println(b)
+	fmt.Println(c)
 }

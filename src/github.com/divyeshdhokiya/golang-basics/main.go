@@ -34,4 +34,8 @@ func main() {
 	fmt.Printf("%v, %T", p, p)
 	fmt.Printf("%v, %T", str, str)
 
+	/* Variable shadowing */
+	p = 100
+	fmt.Printf("%v, %T", p, p)
+
 }

@@ -1,97 +1,41 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
-	/* Looping */
+	/* Defer: invoke a function but delay it's execution   */
+	// c := 10
+	// d := 20
+	// defer fmt.Println(c, d)
+	// e := c + d
+	// fmt.Println(c, d, e)
 
-	// Simple Loops
-	for i, j := 0, 0; i < 5; i, j = i+1, j+2 {
-		fmt.Println(i, j)
-		/*
-			OP:
-				0 0
-				1 2
-				2 4
-				3 6
-				4 8
-		*/
-	}
-
-	k := 0 // scope to main function
-	for k < 5 {
-		fmt.Println(k)
-		k++
-	}
 	/*
 		OP:
-		0
-		1
-		2
-		3
-		4
+		10 20 30
+		10 20
 	*/
-	fmt.Println("--")
 
-	// Exiting Early
-	l := 0
-	for {
-		if l > 5 {
-			break
-		}
-		fmt.Println(l)
-		l++
-	}
-	/*
-		OP:
-		0
-		1
-		2
-		3
-		4
-		5
-	*/
-	println("--")
-
-	// break out from parent look
-Loop:
-	for i := 1; i <= 3; i++ {
-		for j := 1; j <= 3; j++ {
-			fmt.Println(i * j)
-			if i*j >= 3 {
-				break Loop
-			}
-		}
-	}
+	// Order: Normal
+	// fmt.Println(1)
+	// defer fmt.Println(2)
+	// fmt.Println(3)
 	/*
 		OP:
 		1
-		2
 		3
+		2
 	*/
-	println("--")
 
-	// Looping through collections - for range loop
-	s := []int{1, 2, 3}
-	for m, n := range s {
-		fmt.Println(m, n)
-	}
+	// Order: LIFO - Last in first out
+	defer fmt.Println(1)
+	defer fmt.Println(2)
+	defer fmt.Println(3)
 	/*
 		OP:
-		0 1
-		1 2
-		2 3
-	*/
-	// Ignore index
-	for _, n := range s {
-		fmt.Println(n)
-	}
-	/*
-		OP:
-		1
-		2
 		3
+		2
+		1
 	*/
+
 }
